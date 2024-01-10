@@ -1,9 +1,10 @@
 // Подключение к div-элементу
 var div = document.getElementById("str");
 
-document.body.addEventListener('click', function() {
+document.onclick = function() {
     console.log('Кликнули на body!');
-});
+
+};
 
 
 function readInput() {
@@ -46,7 +47,6 @@ function readInput() {
 
     output_mf(a, b, c)
 }
-
 function output_mf(a, b, c) {
     
     // условия 
