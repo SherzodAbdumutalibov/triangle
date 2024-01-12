@@ -68,3 +68,5 @@ function clear12() {
   div.innerText = "...";
   console.clear();
 }
+
+

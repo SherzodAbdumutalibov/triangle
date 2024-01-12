@@ -27,6 +27,10 @@ function readInput() {
     var chisla = [a, b ,c];
     var sumDegree = (a + b + c) == 180;
 
+    if (val.charAt(0) === '.') {
+        divForWrite.innerText = 'Нельзя начинать с точки';
+        return;
+    }
     if (sumDegree) {
         // ------------ Проверка на запятую ------------ 
         if (isNaN(a) || isNaN(b) || isNaN(c)) {
@@ -43,11 +47,11 @@ function readInput() {
 
             var dot = val.indexOf('.');
             
-            if (dot == true) {
+            if (dot === true) {
                 
                 dot = val.slice(-1);
 
-                console.log('dot2', dot);
+                console.log('dot', dot);
 
                 if (dot === '.') {
                     divForWrite.innerText = 'После точки должна стоять цифра';
@@ -69,18 +73,19 @@ function readInput() {
         for (i in chisla) {
             var degree = chisla[i];
             if (degree == 90) {
-                console.log('Это Прямоугольный треугольник');
+                divForWrite.innerText = 'Это Прямоугольный треугольник';
                 return
             } else if (a == 60 && b == 60 && c == 60) {
-                console.log('Это Равнобедренный треугольник')
+                divForWrite.innerText = 'Это Равнобедренный треугольник';
+                drawing(300, 300);
                 return
             }
             else if (degree < 90) {
-                console.log('Это Остроугольнй треугольник')
+                divForWrite.innerText = 'Это Остроугольнй треугольник';
                 return
             } 
             else if (degree > 90) {
-                console.log('Это Тупоугольный треугольник')
+                divForWrite.innerText = 'Это Тупоугольный треугольник';
                 return
             } 
             console.log(chisla[i])
@@ -116,6 +121,53 @@ function output_mf(a, b, c) {
 function clear12() {
     document.getElementById('input_id').value = '';
     divForWrite.innerText = '...';
-    console.clear()
+    console.clear();
+    document.querySelector("#canvas").style.backgroundColor = "";
+    document.querySelector("#canvas").style.border = "";
 }
+
+
+
+// -- Квадрат --
+
+// установка заливки
+// c.fillStyle = '#ba9d9b'; 
+
+// .fillRect(y, x, ySize, xSize)
+// c.fillRect(0, 0, 100, 100);
+
+    
+// ---------- CANVAS ---------- 
+function drawing(x, y) {
+
+    document.querySelector("#canvas").style.backgroundColor = "#3d3d3d";
+    document.querySelector("#canvas").style.border = "1px white solid";
+    
+
+    //  получение ссылки на элемент canvas
+    let canvas = document.getElementById('canvas');
+
+    // получение 2D-контекста рисования
+    let c = canvas.getContext('2d');
+    // Основание
+    c.moveTo(x-280, y-20);
+    c.lineTo(x-20, y-20);
+
+    // Левая сторона
+    c.moveTo(x-280, y-20);
+    c.lineTo(x/2, y-280);
+
+    // Правая сторона   
+    c.moveTo(x-20, y-20);
+    c.lineTo(x/2, y-280);
+
+    // определение цвета
+    c.strokeStyle = 'red';
+    // ширина линии
+    c.lineWidth = 2;
+
+    // вывод на экран
+    c.stroke();
+}
+
 
